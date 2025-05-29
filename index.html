@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Divertidas - Tu Bot te Guía</title>
+    <meta name="description" content="Aprende, ahorra, crece. Sin aburrimiento. Tu compañero financiero inteligente.">
+    <meta name="keywords" content="finanzas, bot, ahorro, aprendizaje financiero, gamificación">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* -------------------------------------------------------------------------- */
+        /* Critical CSS                                 */
+        /* -------------------------------------------------------------------------- */
+        /* Basic reset and above-the-fold styles */
+        :root {
+            --primary-color: #6B46C1; /* Púrpura vibrante */
+            --secondary-color: #FFD700; /* Amarillo oro */
+            --accent-color: #48BB78; /* Verde esmeralda */
+            --accent-color-darker: #38A169;
+            --neutral-color: #F7FAFC; /* Gris claro */
+            --neutral-contrast-bg: #EDF2F7;
+            --text-color: #2D3748; /* Dark gray for text */
+            --light-text-color: #4A5568; /* Lighter gray for subtitles */
+            --white-color: #FFFFFF;
+
+            --font-headers: 'Poppins', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+
+            --h1-size: 48px;
+            --h2-size: 32px;
+            --h3-size: 24px;
+            --body-text-size: 18px;
+
+            --spacing-unit: 8px;
+            --section-padding-y: calc(var(--spacing-unit) * 10); /* 80px */
+            --hero-padding-y: calc(var(--spacing-unit) * 12.5); /* 100px */
+
+            --container-max-width: 1200px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 100%; /* Corresponds to 16px by default */
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            font-size: var(--body-text-size);
+            line-height: 1.6;
+            background-color: var(--neutral-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header basic styles */
+        .header {
+            background-color: var(--white-color);
+            padding: calc(var(--spacing-unit) * 2) 0; /* 16px */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2); /* 16px */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-headers);
+            font-size: calc(var(--spacing-unit) * 3); /* 24px */
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Hero basic styles */
+        .hero-section {
+            background-color: var(--neutral-color); /* Or a gradient if preferred later */
+            padding-top: var(--hero-padding-y);
+            padding-bottom: var(--hero-padding-y);
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-family: var(--font-headers);
+            font-size: var(--h1-size);
+            color: var(--primary-color);
+            margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* Non-Critical CSS                             */
+        /* -------------------------------------------------------------------------- */
+        /* General Styles */
+        h1, h2, h3 {
+            font-family: var(--font-headers);
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        h1 { font-size: var(--h1-size); margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */ }
+        h2 { font-size: var(--h2-size); margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */ }
+        h3 { font-size: var(--h3-size); margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */ }
+
+        p {
+            margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+            color: var(--light-text-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding-left: calc(var(--spacing-unit) * 2); /* 16px */
+            padding-right: calc(var(--spacing-unit) * 2); /* 16px */
+        }
+
+        section {
+            padding-top: var(--section-padding-y);
+            padding-bottom: var(--section-padding-y);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3); /* 12px 24px */
+            font-family: var(--font-headers);
+            font-size: var(--body-text-size);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: calc(var(--spacing-unit) * 0.75); /* 6px */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            width: 280px;
+            height: 60px;
+            line-height: calc(60px - (var(--spacing-unit) * 1.5 * 2)); /* Adjust line-height for vertical centering */
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color-darker);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: calc(var(--spacing-unit) * 3); /* 24px */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--light-text-color);
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            font-size: calc(var(--spacing-unit) * 3.5); /* 28px */
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 700px; /* Constrain text width */
+        }
+        .hero-section .subtitulo {
+            font-size: var(--h2-size);
+            color: var(--light-text-color);
+            margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+        }
+        .hero-visual {
+            margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+            width: 100%;
+            max-width: 450px; /* Control bot image size */
+        }
+
+        /* Pain Points Section ("Cansado de que el dinero sea un misterio?") */
+        .pain-points-section {
+            background-color: var(--neutral-contrast-bg);
+        }
+        .pain-points-section .container {
+            text-align: center;
+        }
+        .pain-points-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: calc(var(--spacing-unit) * 3); /* 24px */
+            margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+        }
+        .pain-point {
+            background-color: var(--white-color);
+            padding: calc(var(--spacing-unit) * 3); /* 24px */
+            border-radius: calc(var(--spacing-unit) * 1); /* 8px */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            flex-basis: calc(33.333% - calc(var(--spacing-unit) * 2)); /* Adjust for gap */
+            min-width: 280px;
+        }
+        .pain-point-icon {
+            font-size: calc(var(--spacing-unit) * 5); /* 40px */
+            color: var(--primary-color);
+            margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+        }
+
+        /* Features Section ("Tu Compañero Financiero Inteligente") */
+        .features-section .container {
+            text-align: center;
+        }
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: calc(var(--spacing-unit) * 4); /* 32px */
+            margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+        }
+        .feature-card {
+            background-color: var(--white-color);
+            padding: calc(var(--spacing-unit) * 3); /* 24px */
+            border-radius: calc(var(--spacing-unit) * 1); /* 8px */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            flex-basis: calc(33.333% - calc(var(--spacing-unit) * 3)); /* Adjust for gap */
+            min-width: 280px;
+            text-align: center;
+        }
+        .feature-icon {
+            width: 80px; /* Placeholder for visual icon */
+            height: 80px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            margin: 0 auto calc(var(--spacing-unit) * 2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(var(--spacing-unit) * 4); /* 32px */
+            color: var(--primary-color);
+        }
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit); /* 8px */
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: var(--neutral-color);
+        }
+        .testimonials-section .container {
+            text-align: center;
+        }
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: calc(var(--spacing-unit) * 3); /* 24px */
+            margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+        }
+        .testimonial-card {
+            background-color: var(--white-color);
+            padding: calc(var(--spacing-unit) * 3); /* 24px */
+            border-radius: calc(var(--spacing-unit) * 1); /* 8px */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            flex-basis: calc(48% - calc(var(--spacing-unit) * 1.5));
+            min-width: 280px;
+            text-align: left;
+        }
+        .testimonial-card img.avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            float: left;
+            margin-right: calc(var(--spacing-unit) * 2); /* 16px */
+            margin-bottom: var(--spacing-unit); /* 8px */
+        }
+        .testimonial-card p.quote {
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-unit); /* 8px */
+        }
+        .testimonial-card p.author {
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: right;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--neutral-contrast-bg);
+        }
+        .faq-section .container {
+            max-width: 800px; /* Narrower for FAQs */
+            text-align: center;
+        }
+        .faq-item {
+            background-color: var(--white-color);
+            margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+            border-radius: calc(var(--spacing-unit) * 0.5); /* 4px */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .faq-question {
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5); /* 16px 20px */
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary-color);
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: calc(var(--spacing-unit) * 2.5); /* 20px */
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            padding: 0 calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2); /* 0 20px 16px */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            text-align: left;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px; /* Adjust as needed */
+            padding-top: var(--spacing-unit); /* 8px */
+            padding-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+        }
+
+
+        /* Final CTA Section */
+        .final-cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white-color);
+            text-align: center;
+        }
+        .final-cta-section h2 {
+            color: var(--white-color);
+        }
+        .final-cta-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+        }
+        .final-cta-section .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        .final-cta-section .btn-primary:hover {
+            background-color: #FFC700; /* Slightly darker yellow */
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-color);
+            color: var(--neutral-color);
+            padding: calc(var(--spacing-unit) * 5) 0; /* 40px */
+            text-align: center;
+        }
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer p {
+            color: var(--neutral-color);
+            margin-bottom: var(--spacing-unit); /* 8px */
+            font-size: calc(var(--body-text-size) * 0.9); /* 16.2px */
+        }
+        .footer-links {
+            margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+        }
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 var(--spacing-unit); /* 8px */
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .email-signup-form {
+            margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+            display: flex;
+            gap: var(--spacing-unit); /* 8px */
+            max-width: 400px;
+            width: 100%;
+        }
+        .email-signup-form input[type="email"] {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 1.25); /* 10px */
+            border: 1px solid var(--light-text-color);
+            border-radius: calc(var(--spacing-unit) * 0.5); /* 4px */
+            font-size: calc(var(--body-text-size) * 0.9); /* 16.2px */
+        }
+        .email-signup-form button {
+            padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2); /* 10px 16px */
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            border: none;
+            border-radius: calc(var(--spacing-unit) * 0.5); /* 4px */
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .email-signup-form button:hover {
+            background-color: var(--accent-color-darker);
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* Responsive Styles                             */
+        /* -------------------------------------------------------------------------- */
+
+        /* Tablet Styles (up to 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --h1-size: 38px;
+                --h2-size: 28px;
+                --body-text-size: 16px;
+            }
+
+            .nav-menu {
+                display: none; /* Hide menu by default */
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on header height */
+                left: 0;
+                width: 100%;
+                background-color: var(--white-color);
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: var(--spacing-unit) 0; /* 8px */
+            }
+            .nav-menu.active {
+                display: flex; /* Show when active */
+            }
+            .nav-menu li {
+                margin: var(--spacing-unit) 0; /* 8px */
+                text-align: center;
+            }
+            .menu-toggle {
+                display: block; /* Show hamburger icon */
+            }
+
+            .hero-section .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content {
+                order: 2;
+                text-align: center;
+            }
+            .hero-visual {
+                order: 1;
+                margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+                max-width: 300px; /* Smaller bot on tablet */
+            }
+            .btn-primary { /* Full width CTA on mobile */
+                 width: 100%;
+                 max-width: 320px; /* Max width for very large button */
+            }
+
+            .pain-points-grid, .features-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .pain-point, .feature-card {
+                flex-basis: 100%;
+                max-width: 400px; /* Limit width on stacked items */
+            }
+            .testimonials-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .testimonial-card {
+                flex-basis: 100%;
+                max-width: 500px;
+            }
+        }
+
+        /* Mobile Styles (up to 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --h1-size: 32px;
+                --h2-size: 24px;
+                --body-text-size: 14px;
+                --section-padding-y: calc(var(--spacing-unit) * 5); /* 40px */
+                --hero-padding-y: calc(var(--spacing-unit) * 6); /* 48px */
+            }
+            h1 { margin-bottom: calc(var(--spacing-unit) * 2); } /* 16px */
+            h2 { margin-bottom: calc(var(--spacing-unit) * 2); } /* 16px */
+            h3 { margin-bottom: var(--spacing-unit); } /* 8px */
+
+            .logo { font-size: calc(var(--spacing-unit) * 2.5); } /* 20px */
+
+            .hero-visual {
+                max-width: 250px; /* Even smaller bot */
+            }
+
+            .pain-point, .feature-card, .testimonial-card {
+                padding: calc(var(--spacing-unit) * 2); /* 16px */
+            }
+
+            .email-signup-form {
+                flex-direction: column;
+            }
+            .email-signup-form input[type="email"],
+            .email-signup-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="nav-container container">
+            <a href="#hero" class="logo" aria-label="Finanzas Divertidas Inicio">FD Bot</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">☰</button>
+            <nav>
+                <ul class="nav-menu" id="navMenu" role="menubar">
+                    <li role="none"><a href="#hero" role="menuitem">Inicio</a></li>
+                    <li role="none"><a href="#pain-points" role="menuitem">¿Para Quién?</a></li>
+                    <li role="none"><a href="#features" role="menuitem">Características</a></li>
+                    <li role="none"><a href="#testimonials" role="menuitem">Testimonios</a></li>
+                    <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
+                    <li role="none"><a href="#final-cta" role="menuitem" class="btn btn-secondary">¡Únete!</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" id="hero" aria-labelledby="hero-headline">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="hero-headline">Finanzas divertidas. Tu bot te guía.</h1>
+                    <p class="subtitulo">Aprende, ahorra, crece. Sin aburrimiento.</p>
+                    <a href="#final-cta" class="btn btn-primary cta-track" data-cta-name="Hero_JoinBeta">¡Únete a la Beta y Juega con tu Dinero!</a>
+                    <p style="margin-top: 24px;">
+                        <a href="#video-placeholder" class="btn-secondary cta-track" data-cta-name="Hero_WatchVideo" style="padding: 8px 16px; font-size: 16px;">▶️ Mira el Video del Bot</a>
+                    </p>
+                </div>
+                <div class="hero-visual">
+                    <img src="https://placehold.co/450x400/6B46C1/FFD700?text=Tu+Bot+Amigable&font=Poppins" alt="Ilustración de un bot financiero caricaturesco y amigable" style="border-radius: 15px;">
+                </div>
+            </div>
+        </section>
+
+        <section class="pain-points-section" id="pain-points" aria-labelledby="pain-points-title">
+            <div class="container">
+                <h2 id="pain-points-title">¿Cansado de que el dinero sea un misterio? 🤔</h2>
+                <p>Las finanzas tradicionales pueden ser abrumadoras y poco motivantes. Entendemos tu frustración.</p>
+                <div class="pain-points-grid">
+                    <div class="pain-point">
+                        <div class="pain-point-icon" aria-hidden="true">🤯</div>
+                        <h3>Complejidad Agobiante</h3>
+                        <p>Términos confusos y procesos que parecen diseñados para expertos.</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-point-icon" aria-hidden="true">📉</div>
+                        <h3>Falta de Motivación</h3>
+                        <p>Ahorrar e invertir se siente como una tarea, no como un logro.</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-point-icon" aria-hidden="true">❓</div>
+                        <h3>Consejos Genéricos</h3>
+                        <p>Soluciones que no se adaptan a tu vida ni a tus metas personales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section" id="features" aria-labelledby="features-title">
+            <div class="container">
+                <h2 id="features-title">Tu Compañero Financiero Inteligente 🤖✨</h2>
+                <p>Descubre cómo nuestro bot te ayuda a tomar el control de tu dinero de forma fácil y divertida.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🎨</div>
+                        <h3>Bot Personalizable</h3>
+                        <p>Adapta a tu bot con estilos y personalidades que te motiven. ¡Tu dinero, tus reglas!</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">💡</div>
+                        <h3>Recomendaciones Inteligentes</h3>
+                        <p>Basado en tus movimientos bancarios (¡con tu permiso!), recibe consejos a tu medida.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🏆</div>
+                        <h3>Gamificación Divertida</h3>
+                        <p>Gana puntos, sube de nivel y desbloquea recompensas por alcanzar tus metas financieras.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rewards-section" id="rewards" aria-labelledby="rewards-title">
+            <div class="container">
+                <h2 id="rewards-title">Transforma Tus Hábitos, Gana Recompensas 🚀</h2>
+                <p>Visualiza tu progreso y cómo el bot te ayuda a alcanzar metas comunes.</p>
+                <div style="background-color: #e9ecef; padding: 20px; border-radius: 8px; text-align: center; margin-top: 32px;">
+                    <h3 style="color: var(--primary-color);">Ejemplo de Meta: Viaje a la Playa 🏖️</h3>
+                    <p>Progreso: 60%</p>
+                    <div style="width: 100%; background-color: #ccc; border-radius: 4px; margin-top: 8px;">
+                        <div style="width: 60%; background-color: var(--accent-color); height: 24px; border-radius: 4px; text-align: center; line-height: 24px; color: white;">60%</div>
+                    </div>
+                    <p style="font-size: 0.9em; margin-top: 8px;"><em>Al pasar el cursor (en escritorio), verías cómo el bot te ayuda.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
+            <div class="container">
+                <h2 id="testimonials-title">Historias Reales de Éxito 🎉</h2>
+                <p>Jóvenes como tú ya están transformando sus finanzas con nuestro bot.</p>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <img src="https://placehold.co/70x70/6B46C1/FFFFFF?text=Ana&font=Poppins" alt="Avatar de Ana P." class="avatar">
+                        <p class="quote">"¡Nunca pensé que ahorrar podría ser divertido! El bot me mantiene motivada y entiendo mucho mejor mis gastos."</p>
+                        <p class="author">- Ana P., Estudiante</p>
+                    </article>
+                    <article class="testimonial-card">
+                        <img src="https://placehold.co/70x70/48BB78/FFFFFF?text=Luis&font=Poppins" alt="Avatar de Luis G." class="avatar">
+                        <p class="quote">"Las recomendaciones personalizadas son geniales. Me ayudó a identificar dónde podía recortar gastos sin sacrificar lo que me gusta."</p>
+                        <p class="author">- Luis G., Joven Profesional</p>
+                    </article>
+                    <article class="testimonial-card">
+                        <img src="https://placehold.co/70x70/FFD700/6B46C1?text=Sofia&font=Poppins" alt="Avatar de Sofía M." class="avatar">
+                        <p class="quote">"La gamificación es adictiva en el buen sentido. ¡Ya estoy ahorrando para mi próximo viaje gracias a los retos del bot!"</p>
+                        <p class="author">- Sofía M., Emprendedora</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq" aria-labelledby="faq-title">
+            <div class="container">
+                <h2 id="faq-title">Preguntas Frecuentes (FAQ) ❓</h2>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">¿Es seguro conectar mis cuentas bancarias?</div>
+                    <div class="faq-answer" id="faq-answer-1" role="region">
+                        <p>Sí, la seguridad es nuestra máxima prioridad. Utilizamos encriptación de nivel bancario y protocolos de seguridad robustos para proteger tu información. Solo tenemos acceso de lectura a tus transacciones para ofrecerte recomendaciones, nunca movemos tu dinero.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-2">¿Tiene algún costo usar el bot?</div>
+                    <div class="faq-answer" id="faq-answer-2" role="region">
+                        <p>Actualmente estamos en fase Beta, ¡y es completamente gratis! Queremos que la mayor cantidad de jóvenes prueben la herramienta y nos den su feedback. En el futuro, podríamos introducir planes premium con características avanzadas, pero siempre habrá una opción gratuita robusta.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-3">¿Cómo me ayuda el bot a aprender sobre finanzas?</div>
+                    <div class="faq-answer" id="faq-answer-3" role="region">
+                        <p>El bot simplifica conceptos financieros complejos a través de explicaciones claras, interacciones divertidas y pequeños "tips" educativos. La gamificación te anima a cumplir metas y entender el impacto de tus decisiones financieras de una forma práctica.</p>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section id="interactive-elements-info" style="padding: 40px 0; text-align: center; background: #f0f0f0;">
+            <div class="container">
+                <h2>Próximamente: ¡Más Interacción!</h2>
+                <p>Estamos trabajando en herramientas aún más divertidas para ti:</p>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+                    <div style="border: 1px dashed var(--primary-color); padding: 20px; border-radius: 8px; width: 300px;">
+                        <h3>Cuestionario: "¿Qué tipo de ahorrador eres?"</h3>
+                        <p>Descubre tu perfil y recibe consejos aún más personalizados.</p>
+                    </div>
+                    <div style="border: 1px dashed var(--accent-color); padding: 20px; border-radius: 8px; width: 300px;">
+                        <h3>Simulador de Tareas del Bot</h3>
+                        <p>Interactúa con el bot en mini-juegos para ganar puntos virtuales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta-section" id="final-cta" aria-labelledby="final-cta-title">
+            <div class="container">
+                <h2 id="final-cta-title">¿Listo para que tus finanzas sean divertidas?</h2>
+                <p>Únete a nuestra comunidad Beta y sé de los primeros en experimentar una nueva forma de gestionar tu dinero. ¡Es gratis y lleno de sorpresas!</p>
+                <a href="#" class="btn btn-primary cta-track" data-cta-name="Final_JoinBeta">¡Únete a la Beta y Juega con tu Dinero!</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos de Servicio</a>
+                <a href="#">Contacto</a>
+            </div>
+            <form class="email-signup-form" id="emailSignupForm">
+                <label for="emailInputFooter" class="sr-only">Tu correo electrónico</label>
+                <input type="email" id="emailInputFooter" name="email" placeholder="Recibe Consejos Financieros Divertidos" required aria-label="Tu correo electrónico para consejos">
+                <button type="submit" class="cta-track" data-cta-name="Footer_SubscribeConsejos">Suscribirse</button>
+            </form>
+            <p id="signupMessageFooter" style="margin-top: 8px; height: 16px;"></p>
+            <p>&copy; <span id="currentYear"></span> Finanzas Divertidas Bot. Todos los derechos reservados.</p>
+            <p>Hecho con ❤️ para jóvenes con ganas de crecer.</p>
+        </div>
+    </footer>
+
+    <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}</style>
+
+    <script>
+    /* ========================================================================== */
+    /* JavaScript Functionality                        */
+    /* ========================================================================== */
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // --- Configuration Variables (for easy customization if needed later) ---
+        const MOBILE_BREAKPOINT = 768; // pixels
+
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function() {
+                const isExpanded = navMenu.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.textContent = isExpanded ? '✕' : '☰'; // Change icon
+            });
+
+            // Close menu when a link is clicked (optional)
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < MOBILE_BREAKPOINT) {
+                        navMenu.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        menuToggle.textContent = '☰';
+                    }
+                });
+            });
+        }
+
+        // --- Smooth Scroll for Navigation Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Check if it's a FAQ link; if so, let FAQ handler manage it.
+                if (this.closest('.faq-item')) return;
+
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    let headerOffset = 0;
+                    const header = document.getElementById('header');
+                    if (header && getComputedStyle(header).position === 'sticky') {
+                        headerOffset = header.offsetHeight;
+                    }
+                    
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    // For ARIA: Set focus to the target section after scroll (optional but good for a11y)
+                    // targetElement.focus({ preventScroll: true }); // May need tabindex="-1" on sections
+                }
+            });
+        });
+
+        // --- FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            if (question && answer) {
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.toggle('active');
+                    question.setAttribute('aria-expanded', isActive);
+                    if (isActive) {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    } else {
+                        answer.style.maxHeight = "0";
+                    }
+                });
+                // Allow keyboard activation (Enter or Space)
+                question.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        question.click();
+                    }
+                });
+            }
+        });
+
+        // --- Email Form Validation (Simple) ---
+        const emailForm = document.getElementById('emailSignupForm');
+        const emailInputFooter = document.getElementById('emailInputFooter');
+        const signupMessageFooter = document.getElementById('signupMessageFooter');
+
+        if (emailForm && emailInputFooter && signupMessageFooter) {
+            emailForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = emailInputFooter.value;
+                if (validateEmail(email)) {
+                    signupMessageFooter.textContent = '¡Gracias por suscribirte!';
+                    signupMessageFooter.style.color = 'var(--accent-color)';
+                    emailInputFooter.value = ''; // Clear input
+                    // Here you would typically send the email to your backend/service
+                    console.log('Email submitted:', email);
+                    trackEvent('Subscription', 'Footer_SubscribeConsejos', email);
+                } else {
+                    signupMessageFooter.textContent = 'Por favor, introduce un email válido.';
+                    signupMessageFooter.style.color = 'red';
+                }
+                setTimeout(() => { signupMessageFooter.textContent = ''; }, 3000);
+            });
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        // --- Update Current Year in Footer ---
+        const currentYearSpan = document.getElementById('currentYear');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Placeholder for Analytics Event Tracking ---
+        // This function simulates sending an event to an analytics service.
+        // Replace with your actual analytics integration (e.g., Google Analytics gtag.js)
+        function trackEvent(category, action, label) {
+            console.log(`Analytics Event: Category='${category}', Action='${action}', Label='${label || ''}'`);
+            // Example for Google Analytics (if gtag is loaded):
+            // if (typeof gtag === 'function') {
+            //     gtag('event', action, {
+            //         'event_category': category,
+            //         'event_label': label
+            //     });
+            // }
+        }
+
+        // Add event listeners to all elements with 'cta-track' class
+        document.querySelectorAll('.cta-track').forEach(cta => {
+            cta.addEventListener('click', function() {
+                const ctaName = this.dataset.ctaName || 'Unknown CTA';
+                const ctaType = this.tagName === 'A' ? 'Link' : 'Button';
+                trackEvent('CTA Click', ctaName, `Type: ${ctaType}, Text: ${this.textContent.trim()}`);
+            });
+        });
+
+
+        // --- Active Navigation Link Highlighting (simple version based on scroll) ---
+        // This can be more complex if sections are very short or overlap significantly.
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = document.querySelectorAll('#navMenu a[href^="#"]');
+
+        function changeLinkState() {
+            let index = sections.length;
+            let headerHeight = document.getElementById('header')?.offsetHeight || 0;
+
+            while(--index && window.scrollY + headerHeight + 50 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('active'));
+            // Ensure the link exists before trying to add 'active' class
+            if (sections[index]) {
+                 const activeLink = document.querySelector(`#navMenu a[href="#${sections[index].id}"]`);
+                 if (activeLink) {
+                     activeLink.classList.add('active');
+                 }
+            } else if (window.scrollY < sections[0].offsetTop - headerHeight - 50) {
+                // If above the first section, highlight the "Home" or first link
+                const firstLink = document.querySelector(`#navMenu a[href="#${sections[0].id}"]`);
+                 if (firstLink) {
+                     firstLink.classList.add('active');
+                 }
+            }
+        }
+        // Initial call and on scroll
+        changeLinkState();
+        window.addEventListener('scroll', changeLinkState);
+
+        // --- Deferred loading for non-critical assets (conceptual) ---
+        // Example: Lazy load images (could use Intersection Observer API for more robust solution)
+        // For simplicity, this example does not implement complex lazy loading.
+        // For critical CSS: the <style> block in <head> handles initial fast paint.
+        // This script itself is at the end of <body>, so it's naturally deferred.
+
+        console.log('Landing page scripts loaded and initialized.');
+    });
+    </script>
+</body>
+</html>
